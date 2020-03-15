@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/environmentListFragment">
+
+    <fragment
+        android:id="@+id/environmentListFragment"
+        android:name="com.sekiya9311.measureenvironment.feature.environmentlist.EnvironmentListFragment"
+        android:label="EnvironmentListFragment">
+        <action
+            android:id="@+id/action_environmentListFragment_to_environmentGraphFragment"
+            app:destination="@id/environmentGraphFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/environmentGraphFragment"
+        android:name="com.sekiya9311.measureenvironment.feature.environmentgraph.EnvironmentGraphFragment"
+        android:label="EnvironmentGraphFragment" />
+</navigation>
