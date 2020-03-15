@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/environment_list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.environmentlist.EnvironmentListFragment">
+        tools:context=".feature.environments.EnvironmentsFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="EnvironmentList" />
+            android:text="Environments" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

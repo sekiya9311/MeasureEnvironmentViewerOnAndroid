@@ -1,4 +1,4 @@
-package com.sekiya9311.measureenvironment.feature.environmentlist
+package com.sekiya9311.measureenvironment.feature.environments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sekiya9311.measureenvironment.R
-import com.sekiya9311.measureenvironment.databinding.EnvironmentListFragmentBinding
+import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentsBinding
 
-class EnvironmentListFragment : Fragment() {
+class EnvironmentsFragment : Fragment() {
 
     private val viewModel by lazy {
-        ViewModelProvider(this).get(EnvironmentListViewModel::class.java)
+        ViewModelProvider(this).get(EnvironmentsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -21,9 +21,9 @@ class EnvironmentListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = DataBindingUtil.inflate<EnvironmentListFragmentBinding>(
+        val binding = DataBindingUtil.inflate<FragmentEnvironmentsBinding>(
             inflater,
-            R.layout.environment_list_fragment,
+            R.layout.fragment_environments,
             container,
             false
         )

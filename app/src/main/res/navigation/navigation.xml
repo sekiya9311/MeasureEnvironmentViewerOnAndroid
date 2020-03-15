@@ -2,14 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation"
-    app:startDestination="@id/environmentListFragment">
+    app:startDestination="@id/environmentsFragment">
 
     <fragment
-        android:id="@+id/environmentListFragment"
-        android:name="com.sekiya9311.measureenvironment.feature.environmentlist.EnvironmentListFragment"
-        android:label="EnvironmentListFragment">
+        android:id="@+id/environmentsFragment"
+        android:name="com.sekiya9311.measureenvironment.feature.environments.EnvironmentsFragment"
+        android:label="EnvironmentsFragment">
         <action
-            android:id="@+id/action_environmentListFragment_to_environmentGraphFragment"
+            android:id="@+id/action_environmentsFragment_to_environmentGraphFragment"
             app:destination="@id/environmentGraphFragment" />
     </fragment>
     <fragment

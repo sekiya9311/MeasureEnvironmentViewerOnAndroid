@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sekiya9311.measureenvironment.R
-import com.sekiya9311.measureenvironment.databinding.EnvironmentGraphFragmentBinding
+import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentGraphBinding
 
 class EnvironmentGraphFragment : Fragment() {
 
@@ -21,9 +21,9 @@ class EnvironmentGraphFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = DataBindingUtil.inflate<EnvironmentGraphFragmentBinding>(
+        val binding = DataBindingUtil.inflate<FragmentEnvironmentGraphBinding>(
             inflater,
-            R.layout.environment_graph_fragment,
+            R.layout.fragment_environment_graph,
             container,
             false
         )
