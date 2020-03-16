@@ -1,6 +1,6 @@
 package com.sekiya9311.measureenvironment.model
 
-class Environments(
+data class Environments(
     private val list: List<Environment>
 ) : List<Environment> by list {
 
