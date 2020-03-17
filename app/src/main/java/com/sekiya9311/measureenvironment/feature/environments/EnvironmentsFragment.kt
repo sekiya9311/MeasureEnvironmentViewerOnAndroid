@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.sekiya9311.measureenvironment.R
 import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentsBinding
-import com.sekiya9311.measureenvironment.model.Environment
 import com.sekiya9311.measureenvironment.model.EnvironmentADay
+import com.sekiya9311.measureenvironment.toDateString
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.databinding.GroupieViewHolder
-import java.util.*
 
 class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
 
@@ -27,10 +27,14 @@ class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
         val groupAdapter = GroupAdapter<GroupieViewHolder<*>>()
         binding.environmentsRecyclerView.adapter = groupAdapter
 
-        val sampleItems = listOf(
-            EnvironmentsItem(EnvironmentADay(listOf(Environment(0.0, Date()))))
-        )
+        viewModel.environments.observe(viewLifecycleOwner) { environments ->
+            val items = environments.groupBy {
+                it.createdAt.toDateString()
+            }.map {
+                EnvironmentsItem(EnvironmentADay(it.value))
+            }
 
-        groupAdapter.update(sampleItems)
+            groupAdapter.update(items)
+        }
     }
 }
