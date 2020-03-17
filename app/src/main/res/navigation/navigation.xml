@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/environmentsFragment">
 
     <fragment
         android:id="@+id/environmentsFragment"
         android:name="com.sekiya9311.measureenvironment.feature.environments.EnvironmentsFragment"
-        android:label="EnvironmentsFragment">
+        android:label="EnvironmentsFragment"
+        tools:layout="@layout/fragment_environments">
         <action
             android:id="@+id/action_environmentsFragment_to_environmentGraphFragment"
             app:destination="@id/environmentGraphFragment" />
@@ -15,7 +17,8 @@
     <fragment
         android:id="@+id/environmentGraphFragment"
         android:name="com.sekiya9311.measureenvironment.feature.environmentgraph.EnvironmentGraphFragment"
-        android:label="EnvironmentGraphFragment">
+        android:label="EnvironmentGraphFragment"
+        tools:layout="@layout/fragment_environment_graph">
         <argument
             android:name="dateString"
             app:argType="string" />
