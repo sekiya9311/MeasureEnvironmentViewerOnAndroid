@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.sekiya9311.measureenvironment.R
 import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentsBinding
 import com.sekiya9311.measureenvironment.model.EnvironmentADay
@@ -31,7 +32,13 @@ class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
             val items = environments.groupBy {
                 it.createdAt.toDateString()
             }.map {
-                EnvironmentsItem(EnvironmentADay(it.value))
+                EnvironmentsItem(EnvironmentADay(it.value)) {
+                    val directions = EnvironmentsFragmentDirections
+                        .actionEnvironmentsFragmentToEnvironmentGraphFragment(
+                            it.key
+                        )
+                    findNavController().navigate(directions)
+                }
             }
 
             groupAdapter.update(items)

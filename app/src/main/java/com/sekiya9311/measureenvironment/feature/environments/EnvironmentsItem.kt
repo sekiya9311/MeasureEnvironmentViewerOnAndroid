@@ -7,12 +7,15 @@ import com.sekiya9311.measureenvironment.toDateString
 import com.xwray.groupie.databinding.BindableItem
 
 class EnvironmentsItem(
-    private val environmentsADay: EnvironmentADay
+    private val environmentsADay: EnvironmentADay,
+    private val onClick: () -> Unit
 ) : BindableItem<ItemEnvironmentsBinding>(environmentsADay.hashCode().toLong()) {
     override fun getLayout(): Int = R.layout.item_environments
 
     override fun bind(viewBinding: ItemEnvironmentsBinding, position: Int) {
         viewBinding.dateText.text = environmentsADay.createdAt?.toDateString() ?: ""
         viewBinding.co2AverageText.text = environmentsADay.co2Average.toString()
+
+        viewBinding.root.setOnClickListener { onClick() }
     }
 }

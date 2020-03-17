@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/environmentGraphFragment"
         android:name="com.sekiya9311.measureenvironment.feature.environmentgraph.EnvironmentGraphFragment"
-        android:label="EnvironmentGraphFragment" />
+        android:label="EnvironmentGraphFragment">
+        <argument
+            android:name="dateString"
+            app:argType="string" />
+    </fragment>
 </navigation>
