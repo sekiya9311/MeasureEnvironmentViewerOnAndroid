@@ -9,13 +9,26 @@ import androidx.navigation.fragment.findNavController
 import com.sekiya9311.measureenvironment.R
 import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentsBinding
 import com.sekiya9311.measureenvironment.model.EnvironmentADay
+import com.sekiya9311.measureenvironment.repository.FirestoreRepository
+import com.sekiya9311.measureenvironment.repository.db.AppDatabase
 import com.sekiya9311.measureenvironment.toDateString
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.databinding.GroupieViewHolder
 
 class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
 
-    private val viewModel: EnvironmentsViewModel by viewModels()
+    private val firestore by lazy { FirestoreRepository() }
+    private val environmentDao by lazy {
+        AppDatabase
+            .getInstance(requireNotNull(activity).application)
+            .environmentDao
+    }
+    private val viewModel: EnvironmentsViewModel by viewModels {
+        EnvironmentsViewModelFactory(
+            firestore,
+            environmentDao
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

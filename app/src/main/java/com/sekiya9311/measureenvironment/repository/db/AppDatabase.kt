@@ -10,11 +10,12 @@ import androidx.room.TypeConverters
     entities = [
         EnvironmentEntity::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun environmentDao(): EnvironmentDao
+    abstract val environmentDao: EnvironmentDao
 
     companion object {
         @Volatile
