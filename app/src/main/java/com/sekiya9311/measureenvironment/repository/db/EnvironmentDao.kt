@@ -1,0 +1,22 @@
+package com.sekiya9311.measureenvironment.repository.db
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import java.util.*
+
+@Dao
+interface EnvironmentDao {
+    @Insert
+    fun insert(value: EnvironmentEntity)
+
+    @Query("SELECT * FROM environments ORDER BY created_at DESC")
+    fun getAllLiveData(): LiveData<List<EnvironmentEntity>>
+
+    @Query("SELECT * FROM environments WHERE created_at BETWEEN :from AND :to ORDER BY created_at DESC")
+    fun getBetweenDatesLiveData(from: Date, to: Date): LiveData<List<EnvironmentEntity>>
+
+    @Query("SELECT * FROM environments ORDER BY created_at DESC LIMIT 1")
+    fun fetchLatestLiveData(): LiveData<EnvironmentEntity>
+}
