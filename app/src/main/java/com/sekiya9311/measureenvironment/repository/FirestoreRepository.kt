@@ -22,7 +22,7 @@ class FirestoreRepository() {
         FirebaseFirestore.getInstance()
     }
 
-    val InLogin = auth.currentUser != null
+    val inLogin = auth.currentUser != null
 
     fun addAuthStateListener(listener: (FirebaseAuth) -> Unit) {
         auth.addAuthStateListener(listener)

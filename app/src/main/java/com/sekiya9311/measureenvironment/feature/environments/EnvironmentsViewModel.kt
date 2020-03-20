@@ -26,7 +26,7 @@ class EnvironmentsViewModel(
     private var callSetup = false
 
     init {
-        if (firestore.InLogin) {
+        if (firestore.inLogin) {
             setup()
         } else {
             firestore.addAuthStateListener {
