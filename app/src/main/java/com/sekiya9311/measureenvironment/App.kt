@@ -10,6 +10,8 @@ open class App : Application() {
         super.onCreate()
 
         initializeFirebase()
+
+        ServiceContainer.setup(this)
     }
 
     private fun initializeFirebase() {
