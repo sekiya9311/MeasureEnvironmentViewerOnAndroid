@@ -22,16 +22,11 @@ object ServiceContainer {
         _container[EnvironmentDao::class.java.simpleName] = environmentDao
     }
 
-    fun <T> resolve(key: String, throwIfNotExists: Boolean = false): T? {
-        if (!_container.containsKey(key)) {
-            if (throwIfNotExists)
-                throw IllegalArgumentException("Can't resolve of key")
-            return null
-        }
-
+    fun <T> resolve(key: String, throwIfCantResolve: Boolean = false): T? {
         val res = _container[key] as? T
-        if (res == null && throwIfNotExists)
+        if (res == null && throwIfCantResolve) {
             throw IllegalArgumentException("Can't resolve of key")
+        }
 
         return res
     }
