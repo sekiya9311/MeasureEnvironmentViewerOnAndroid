@@ -1,5 +1,7 @@
 package com.sekiya9311.measureenvironment.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -22,14 +24,22 @@ class FirestoreRepository() {
         FirebaseFirestore.getInstance()
     }
 
-    val inLogin = auth.currentUser != null
+    private var _init = true
+    private val _inLogin = MutableLiveData<Boolean>()
+    val inLogin: LiveData<Boolean> = _inLogin
 
-    fun addAuthStateListener(listener: (FirebaseAuth) -> Unit) {
-        auth.addAuthStateListener(listener)
-    }
-
-    fun removeAuthStateListener(listener: (FirebaseAuth) -> Unit) {
-        auth.removeAuthStateListener(listener)
+    init {
+        auth.addAuthStateListener {
+            if (it.currentUser != null) {
+                _inLogin.postValue(true)
+            } else {
+                // Permit not login when init
+                if (!_init) {
+                    _inLogin.postValue(false)
+                }
+            }
+            _init = false
+        }
     }
 
     suspend fun getEnvironments(from: Date): Flow<Environments> {

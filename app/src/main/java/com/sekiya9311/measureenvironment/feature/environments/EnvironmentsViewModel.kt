@@ -23,19 +23,8 @@ class EnvironmentsViewModel(
         }
     }
 
-    private var callSetup = false
-
     init {
-        if (firestore.inLogin) {
-            setup()
-        } else {
-            firestore.addAuthStateListener {
-                if (it.currentUser != null && !callSetup) {
-                    callSetup = true
-                    setup()
-                }
-            }
-        }
+        setup()
     }
 
     private fun setup() {
