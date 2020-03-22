@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.sekiya9311.measureenvironment.R
 import com.sekiya9311.measureenvironment.ServiceContainer
 import com.sekiya9311.measureenvironment.databinding.FragmentEnvironmentsBinding
-import com.sekiya9311.measureenvironment.model.EnvironmentADay
 import com.sekiya9311.measureenvironment.repository.FirestoreRepository
 import com.sekiya9311.measureenvironment.repository.db.EnvironmentDao
 import com.sekiya9311.measureenvironment.toDateString
@@ -36,14 +35,12 @@ class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
         val groupAdapter = GroupAdapter<GroupieViewHolder<*>>()
         binding.environmentsRecyclerView.adapter = groupAdapter
 
-        viewModel.environments.observe(viewLifecycleOwner) { environments ->
-            val items = environments.groupBy {
-                it.createdAt.toDateString()
-            }.map {
-                EnvironmentsItem(EnvironmentADay(it.value)) {
+        viewModel.environmentsADay.observe(viewLifecycleOwner) { environmentsADay ->
+            val items = environmentsADay.map {
+                EnvironmentsItem(it) {
                     val directions = EnvironmentsFragmentDirections
                         .actionEnvironmentsFragmentToEnvironmentGraphFragment(
-                            it.key
+                            it.createdAt?.toDateString() ?: ""
                         )
                     findNavController().navigate(directions)
                 }

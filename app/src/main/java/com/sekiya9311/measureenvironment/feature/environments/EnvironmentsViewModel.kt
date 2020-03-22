@@ -3,6 +3,7 @@ package com.sekiya9311.measureenvironment.feature.environments
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.sekiya9311.measureenvironment.model.EnvironmentADay
 import com.sekiya9311.measureenvironment.repository.FirestoreRepository
 import com.sekiya9311.measureenvironment.repository.db.EnvironmentDao
 import com.sekiya9311.measureenvironment.repository.db.toEntity
@@ -17,9 +18,14 @@ class EnvironmentsViewModel(
     private val firestore: FirestoreRepository,
     private val environmentsDao: EnvironmentDao
 ) : ViewModel() {
-    val environments by lazy {
-        environmentsDao.getAllLiveData().map {
-            it.toEnvironments()
+    val environmentsADay by lazy {
+        environmentsDao.getAllLiveData().map { environmentEntities ->
+            environmentEntities.toEnvironments()
+                .groupBy { environment ->
+                    environment.createdAt.toString()
+                }.map {
+                    EnvironmentADay(it.value)
+                }
         }
     }
 
