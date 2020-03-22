@@ -8,4 +8,8 @@ data class EnvironmentADay(
     val createdAt = list.firstOrNull()?.createdAt
 
     val co2Average = sumByDouble { it.co2 } / max(1, size)
+
+    companion object {
+        val EMPTY = EnvironmentADay(listOf())
+    }
 }

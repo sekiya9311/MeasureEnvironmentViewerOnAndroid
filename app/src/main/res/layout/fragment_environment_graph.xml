@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -8,9 +9,23 @@
         tools:context=".feature.environmentgraph.EnvironmentGraphFragment">
 
         <TextView
+            android:id="@+id/date_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="EnvironmentGraph" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:paddingTop="2sp"
+            tools:text="2020/03/22" />
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="8sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
