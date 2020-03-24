@@ -14,7 +14,7 @@ class EnvironmentsItem(
 
     override fun bind(viewBinding: ItemEnvironmentsBinding, position: Int) {
         viewBinding.dateText.text = environmentsADay.createdAt?.toDateString() ?: ""
-        viewBinding.co2AverageText.text = environmentsADay.co2Average.toString()
+        viewBinding.co2AverageText.text = "Ave: ${environmentsADay.co2Average} [ppm]"
 
         viewBinding.root.setOnClickListener { onClick() }
     }
