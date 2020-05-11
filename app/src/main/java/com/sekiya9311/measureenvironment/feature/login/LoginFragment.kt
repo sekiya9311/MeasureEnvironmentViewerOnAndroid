@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.sekiya9311.measureenvironment.R
 import com.sekiya9311.measureenvironment.ServiceContainer
-import com.sekiya9311.measureenvironment.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -19,9 +18,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        val binding = FragmentLoginBinding.bind(view)
-
         viewModel.isAuthorized.observe(viewLifecycleOwner, Observer { authorized ->
             if (authorized == null) {
                 return@Observer
@@ -36,6 +32,5 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 LoginFragmentDirections.actionLoginFragmentToEnvironmentsFragment()
             )
         })
-
     }
 }
