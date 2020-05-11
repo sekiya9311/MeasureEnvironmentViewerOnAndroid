@@ -35,7 +35,7 @@ class EnvironmentsFragment : Fragment(R.layout.fragment_environments) {
         val groupAdapter = GroupAdapter<GroupieViewHolder<*>>()
         binding.environmentsRecyclerView.adapter = groupAdapter
 
-        viewModel.environmentsADay.observe(viewLifecycleOwner) { environmentsADay ->
+        viewModel.environmentDays.observe(viewLifecycleOwner) { environmentsADay ->
             val items = environmentsADay.map {
                 EnvironmentsItem(it) {
                     val directions = EnvironmentsFragmentDirections

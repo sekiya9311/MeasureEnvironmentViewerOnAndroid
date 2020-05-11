@@ -8,6 +8,7 @@ import com.sekiya9311.measureenvironment.repository.FirestoreRepository
 import com.sekiya9311.measureenvironment.repository.db.EnvironmentDao
 import com.sekiya9311.measureenvironment.repository.db.toEntity
 import com.sekiya9311.measureenvironment.repository.db.toEnvironments
+import com.sekiya9311.measureenvironment.toDateString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,11 +19,11 @@ class EnvironmentsViewModel(
     private val firestore: FirestoreRepository,
     private val environmentsDao: EnvironmentDao
 ) : ViewModel() {
-    val environmentsADay by lazy {
+    val environmentDays by lazy {
         environmentsDao.getAllLiveData().map { environmentEntities ->
             environmentEntities.toEnvironments()
                 .groupBy { environment ->
-                    environment.createdAt.toString()
+                    environment.createdAt.toDateString()
                 }.map {
                     EnvironmentADay(it.value)
                 }
