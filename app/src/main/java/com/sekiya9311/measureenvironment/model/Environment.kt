@@ -1,15 +1,15 @@
 package com.sekiya9311.measureenvironment.model
 
-import com.sekiya9311.measureenvironment.getDayValue
-import com.sekiya9311.measureenvironment.getMonthValue
-import com.sekiya9311.measureenvironment.getYearValue
+import com.sekiya9311.measureenvironment.getDay
+import com.sekiya9311.measureenvironment.getMonth
+import com.sekiya9311.measureenvironment.getYear
 import java.util.*
 
 data class Environment(
     val co2: Double,
-    val createdAt: Date
+    val createdAt: Calendar
 ) {
-    val year = createdAt.getYearValue()
-    val month = createdAt.getMonthValue()
-    val day = createdAt.getDayValue()
+    val year = createdAt.getYear()
+    val month = createdAt.getMonth()
+    val day = createdAt.getDay()
 }

@@ -37,7 +37,7 @@ class EnvironmentsViewModel(
     private fun setup() {
         viewModelScope.launch {
             val latestDate = environmentsDao.fetchLatestLiveData().value?.createdAt
-                ?: Date(0L)
+                ?: Calendar.getInstance().apply { clear() }
             firestore.getEnvironments(latestDate).collect { source ->
                 withContext(Dispatchers.IO) {
                     source

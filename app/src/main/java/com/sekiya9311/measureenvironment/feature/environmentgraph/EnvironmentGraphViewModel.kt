@@ -10,7 +10,7 @@ import com.sekiya9311.measureenvironment.model.EnvironmentADay
 import com.sekiya9311.measureenvironment.repository.db.EnvironmentDao
 import com.sekiya9311.measureenvironment.repository.db.EnvironmentEntity
 import com.sekiya9311.measureenvironment.repository.db.toEnvironment
-import com.sekiya9311.measureenvironment.toDate
+import com.sekiya9311.measureenvironment.toCalendar
 
 class EnvironmentGraphViewModel(
     val dateString: String,
@@ -19,7 +19,7 @@ class EnvironmentGraphViewModel(
 
     val environmentADay: LiveData<EnvironmentADay>
         get() {
-            val firstDate = dateString.toDate()
+            val firstDate = dateString.toCalendar()
                 ?: return liveData { EnvironmentADay.EMPTY }
             val lastDate = firstDate
                 .addDay(1)

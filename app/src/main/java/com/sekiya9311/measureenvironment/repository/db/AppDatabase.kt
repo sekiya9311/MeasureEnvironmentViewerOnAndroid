@@ -13,7 +13,7 @@ import androidx.room.TypeConverters
     version = 1,
     exportSchema = false
 )
-@TypeConverters(DateConverter::class)
+@TypeConverters(CalendarConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract val environmentDao: EnvironmentDao
 

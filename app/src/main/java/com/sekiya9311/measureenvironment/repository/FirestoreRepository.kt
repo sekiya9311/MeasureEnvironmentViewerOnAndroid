@@ -2,11 +2,13 @@ package com.sekiya9311.measureenvironment.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sekiya9311.measureenvironment.model.Environment
 import com.sekiya9311.measureenvironment.model.Environments
+import com.sekiya9311.measureenvironment.toCalendar
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -42,18 +44,18 @@ class FirestoreRepository() {
         }
     }
 
-    suspend fun getEnvironments(from: Date): Flow<Environments> {
+    suspend fun getEnvironments(from: Calendar): Flow<Environments> {
         return flow {
             val snapshot = firestore
                 .collection(MEASURE_ITEM_COLLECTION_NAME)
-                .whereGreaterThan("created_at", from)
+                .whereGreaterThan("created_at", Timestamp(from.time))
                 .get()
                 .await()
             val list = snapshot.map {
                 val co2 = it.getDouble("co2") ?: return@map null
                 val createdAt = it.getTimestamp("created_at") ?: return@map null
 
-                Environment(co2, createdAt.toDate())
+                Environment(co2, createdAt.toDate().toCalendar())
             }.filterNotNull().sortedByDescending { it.createdAt }
 
             emit(Environments(list))
@@ -76,7 +78,7 @@ class FirestoreRepository() {
                     val co2 = value.getDouble("co2") ?: return@addSnapshotListener
                     val createdAt =
                         value.getTimestamp("created_at") ?: return@addSnapshotListener
-                    offer(Environment(co2, createdAt.toDate()))
+                    offer(Environment(co2, createdAt.toDate().toCalendar()))
                 }
             awaitClose { listener.remove() }
         }

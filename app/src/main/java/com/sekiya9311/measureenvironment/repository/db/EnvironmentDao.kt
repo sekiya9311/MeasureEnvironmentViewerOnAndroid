@@ -16,7 +16,7 @@ interface EnvironmentDao {
     fun getAllLiveData(): LiveData<List<EnvironmentEntity>>
 
     @Query("SELECT * FROM environments WHERE created_at BETWEEN :from AND :to ORDER BY created_at DESC")
-    fun getBetweenDatesLiveData(from: Date, to: Date): LiveData<List<EnvironmentEntity>>
+    fun getBetweenDatesLiveData(from: Calendar, to: Calendar): LiveData<List<EnvironmentEntity>>
 
     @Query("SELECT * FROM environments ORDER BY created_at DESC LIMIT 1")
     fun fetchLatestLiveData(): LiveData<EnvironmentEntity>

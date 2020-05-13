@@ -11,5 +11,5 @@ data class EnvironmentEntity(
     val co2: Double,
     @PrimaryKey
     @ColumnInfo(name = "created_at")
-    val createdAt: Date
+    val createdAt: Calendar
 )
